@@ -23,7 +23,7 @@ const command = (databaseType, options) => {
     const root = process.cwd();
     const templatePath = path.join(__dirname, '..', '..', '..', 'templates');
     shell.cp('-R', path.join(templatePath, database[databaseType]), path.join(root, 'temp'));
-    shell.mv(`${path.join(root, 'temp')}/* .`);
+    shell.mv(`${path.join(root, 'temp')}/*`, '.');
     shell.rm('-rf', path.join(root, 'temp'));
 
     console.log('Your database has been setup');

@@ -13,6 +13,9 @@ const command = (directoryName, options) => {
     const root = process.cwd();
     shell.cp('-R', path.join(__dirname, '..', '..', '..', 'templates', 'newProject'), path.join(root, directoryName));
     shell.mv(path.join(root, directoryName, 'gitignore'), path.join(root, directoryName, '.gitignore'));
+    shell.cd(path.join(root, directoryName, 'openssl'));
+    shell.exec('bash generateSecretKeys.sh web-secret.pem');
+    shell.cd(path.join(root));
     console.log('Your project is ready.');
 };
 
