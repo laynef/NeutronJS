@@ -32,7 +32,12 @@ const command = (databaseType, options) => {
 
 const documentation = () => {
     console.info(`
-    
+Command:
+Database Types:
+=> SQL: Using sequelize for any SQL database
+=> MongoDB: Using mongoose for your MongoDB database
+
+neutron setup-data-base <database-type>
     `);
 };
 
