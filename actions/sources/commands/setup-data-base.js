@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
 
@@ -34,8 +33,8 @@ const documentation = () => {
     console.info(`
 Command:
 Database Types:
-=> SQL: Using sequelize for any SQL database
-=> MongoDB: Using mongoose for your MongoDB database
+=> sql: Using sequelize for any SQL database
+=> mongodb: Using mongoose for your MongoDB database
 
 neutron setup-data-base <database-type>
     `);
