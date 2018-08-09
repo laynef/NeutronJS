@@ -15,14 +15,14 @@ const description = 'Display this documentation';
 const command = () => {
     const commandName = Object.keys(packager.bin).pop();
 
-    console.info(`\n${packager.title}`);
+    console.cyan(`\n${packager.title}`);
 
-    console.info(`\n${packager.title}: Command Line Interface to make your life easier.`);
+    console.cyan(`\n${packager.title}: Command Line Interface to make your life easier.`);
     console.info(`=> The ${packager.title} command is '${kebabCase(commandName)}'. To blast this project into the fifth dimension.`);
     console.info(`=> Use '--help' on any of the commands listed below for more details.`);
     console.info(`\n`);
 
-    console.info(`List of commands:\n`);
+    console.cyan(`List of commands:`);
     console.info(`=> documentation - ${description}`);
     console.info(`=> d - ${description}`);
     for (let command in keyMapOfCommands) {

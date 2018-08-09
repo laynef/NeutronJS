@@ -8,8 +8,9 @@ const command = (versionNumber, options) => {
     if (!versionNumber || !options) {
         console.log('Must enter a version number for your api');
         return;
-    } else if (versionNumber !== Number(versionNumber)) {
+    } else if (versionNumber != Number(versionNumber)) {
         console.log('API Version number must be a number');
+        return;
     }
 
     const templatePath = path.join(__dirname, '..', '..', '..', 'templates');
