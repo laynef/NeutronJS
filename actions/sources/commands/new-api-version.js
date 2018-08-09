@@ -1,0 +1,36 @@
+const fs = require('fs');
+const path = require('path');
+const shell = require('shelljs');
+
+const description = 'Create a new api version';
+
+const command = (versionNumber, options) => {
+    if (!versionNumber || !options) {
+        console.log('Must enter a version number for your api');
+        return;
+    } else if (versionNumber !== Number(versionNumber)) {
+        console.log('API Version number must be a number');
+    }
+
+    const templatePath = path.join(__dirname, '..', '..', '..', 'templates');
+    const controllerPath = path.join(templatePath, 'newApiVersion');
+    const routePath = path.join(templatePath, 'newRouteVersion');
+    const root = process.cwd();
+    shell.cp('-R', controllerPath, path.join(root, 'controllers', `v${versionNumber}`));
+    shell.cp('-R', routePath, path.join(root, 'routes', `v${versionNumber}`));
+    console.log('Your new api version has been created.');
+};
+
+const documentation = () => {
+    console.info(`
+Command:
+
+neutron new-api-version <version-number>
+    `);
+};
+
+module.exports = {
+    command,
+    description,
+    documentation,
+};
