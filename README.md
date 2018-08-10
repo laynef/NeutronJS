@@ -29,3 +29,12 @@ neutron setup-data-base <Your database type [sql *or* mongodb]>
 neutron new-page blogs --routePath='/blogs'
 npm start
 ```
+
+## Documentation
+```
+// For all commands
+neutron
+
+// For a single command
+neutron <command-name> --help
+```
