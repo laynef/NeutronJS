@@ -1,6 +1,7 @@
 # Neutron Js: Opinionated Node.js Framework
 
 Not published yet
+If neutron command name does not work 
 
 ## Features
 - Create a new multithread Node.js server with Pug templating with 8 threads (Ruby on Rails has 5 for their server's scalibity)
@@ -23,6 +24,8 @@ Not published yet
 
 ## Installation
 ```
+git clone https://github.com/laynef/NeutronJS.git
+npm i
 npm i -g
 neutron create <Your project>
 neutron setup-data-base <Your database type [sql *or* mongodb]>
