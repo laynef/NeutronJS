@@ -2,6 +2,17 @@ const fs = require('fs');
 const path = require('path');
 const { expect } = require('chai');
 const { size } = require('lodash');
+const colors = require('colors/safe');
+
+console.blue = (str) => { console.log(colors.blue(str)) }; 
+console.green = (str) => { console.log(colors.green(str)) }; 
+console.cyan = (str) => { console.log(colors.cyan(str)) }; 
+console.red = (str) => { console.log(colors.red(str)) }; 
+console.yellow = (str) => { console.log(colors.yellow(str)) }; 
+console.white = (str) => { console.log(colors.white(str)) }; 
+console.magenta = (str) => { console.log(colors.magenta(str)) }; 
+console.gray = (str) => { console.log(colors.gray(str)) }; 
+console.grey = (str) => { console.log(colors.grey(str)) }; 
 
 // { commandName: { documentation, command, description } }
 const allCommands = require(path.join(__dirname, '..', 'actions', 'sources', 'index.js'));
