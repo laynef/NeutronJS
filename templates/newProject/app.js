@@ -47,7 +47,7 @@ app.use((req, res, next) => {
 });
 
 each(routeVersions, (versionDetails, apiVersion) => {
-    app.get(`/docs/${apiVersion}`, docs({ apiVersion, allRoutes: versionDetails[apiVersion] }));
+    if (process.env.NODE_ENV && process.env.NODE_ENV !== 'production') app.get(`/docs/${apiVersion}`, docs({ apiVersion, allRoutes: versionDetails[apiVersion] }));
     app.use(`/api/${apiVersion}`, versionDetails[`${apiVersion}Router`]);
 });
 
