@@ -19,6 +19,7 @@ Not published yet
 - Generate new page components for each type of frontend web framework/library
 - Generate new reusable (global) components for each type of frontend web framework/library
 - Generate new json files to plugin into your components
+- Automatic deployment scripts to Elastic Beanstalk on AWS using the EB Cli
 
 ## Installation
 ```
