@@ -1,7 +1,8 @@
 # Neutron Js: Opinionated Node.js Framework
 
-Not published yet
-If neutron command name does not work 
+## Requirements
+- Node.js >= 8
+- Redis >= 4
 
 ## Features
 - Create a new multithread Node.js server with Pug templating with 8 threads (Ruby on Rails has 5 for their server's scalibity)
@@ -24,9 +25,9 @@ If neutron command name does not work
 
 ## Installation
 ```
-git clone https://github.com/laynef/NeutronJS.git
-npm i
-npm i -g
+// brew install redis
+// Must have redis running on default port 6379: redis-server
+npm i -g @lfaler/neutronjs
 neutron create <Your project>
 neutron setup-data-base <Your database type [sql *or* mongodb]>
 neutron new-page blogs --routePath='/blogs'
