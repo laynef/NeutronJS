@@ -18,7 +18,7 @@ const command = (controllerName, options) => {
 };
 
 const documentation = () => {
-    console.info(`
+    console.yellow(`
 Command:
 
 neutron new-api-controller <controller-name>

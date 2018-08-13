@@ -23,7 +23,7 @@ const command = (versionNumber, options) => {
 };
 
 const documentation = () => {
-    console.info(`
+    console.yellow(`
 Command:
 
 neutron new-api-version <version-number>

@@ -20,7 +20,7 @@ const command = (directoryName, options) => {
 };
 
 const documentation = () => {
-    console.info(`
+    console.yellow(`
 Command:
 
 neurton create <directory-name>

@@ -5,7 +5,7 @@ const command = (argument1, argumentN, options) => {
 };
 
 const documentation = () => {
-    console.info(`ENTER YOUR DOCUMENTATION`);
+    console.yellow(`ENTER YOUR DOCUMENTATION`);
 };
 
 module.exports = {

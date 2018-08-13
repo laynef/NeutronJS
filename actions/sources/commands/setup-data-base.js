@@ -30,7 +30,7 @@ const command = (databaseType, options) => {
 };
 
 const documentation = () => {
-    console.info(`
+    console.yellow(`
 Command:
 Database Types:
 => sql: Using sequelize for any SQL database
