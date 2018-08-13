@@ -15,7 +15,9 @@ const command = (pageName, routePath, options) => {
     const templatePath = path.join(__dirname, '..', '..', '..', 'templates');
     const templates = fs.readFileSync(path.join(templatePath, 'assets', 'page.pug'), { encoding: 'utf8' });
     const newTemplateAssets = templates.replace(/CLIPAGE/g, pageName);
-    const newTemplate = newTemplateAssets.replace(/CLITITLE/g, startCase(pageName));
+    const newTemplateTitle = newTemplateAssets.replace(/CLITITLE/g, startCase(pageName));
+    const routePathDepth = routePath.split('/').map(e => '../').join('');
+    const newTemplate = newTemplateTitle.replace(/include \.\/utils\/meta\.pug/g, `include ${routePathDepth}utils/meta.pug`);
     const root = process.cwd();
     const settings = require(path.join(root, 'webpack', 'settings.json'));
     const application = fs.readFileSync(path.join(root, 'app.js'), { encoding: 'utf8' });
