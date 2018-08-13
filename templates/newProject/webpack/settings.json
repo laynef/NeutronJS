@@ -1,7 +1,7 @@
 {
     "styleType": "css",
     "jsType": "js",
-    "useBootstrapToggle": true,
+    "useBootstrapToggle": false,
     "bootstrap": {
         "scripts": {
             "alert": true,

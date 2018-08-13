@@ -9,7 +9,7 @@ html(lang="en")
             each file in cssFiles
                 link(src=`/assets/dist/pages${file}`, async)
     body
-        h1(style='text-align: center;') Welcome to Neutron JS
+        h1(style='text-align: center;') CLITITLE
         if process.env.NODE_ENV === 'production'
             script(src='/assets/dist/pages/CLIPAGE.js', async)
         else
