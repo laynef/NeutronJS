@@ -20,7 +20,7 @@ const command = (pageName, routePath, options) => {
     const settings = require(path.join(root, 'webpack', 'settings.json'));
     const application = fs.readFileSync(path.join(root, 'app.js'), { encoding: 'utf8' });
     shell.mkdir('-p', `${path.resolve(root, 'views','pages', routePath)}`);
-    fs.writeFileSync(path.join(root, 'views', 'pages', routePath, `${pageName}.pug`), newTemplate);
+    fs.writeFileSync(path.resolve(root, 'views', 'pages', routePath, `${pageName}.pug`), newTemplate);
     shell.mkdir('-p',`${path.resolve(root, 'assets', settings.styleType, 'pages', routePath)}`);
     shell.mkdir('-p',`${path.resolve(root, 'assets', settings.jsType, 'pages', routePath)}`);
     shell.cp(path.join(templatePath, 'assets', `page.${settings.styleType}`), path.resolve(root, 'assets', settings.styleType, 'pages', routePath, `${pageName}.${settings.styleType}`));
