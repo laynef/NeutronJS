@@ -1,11 +1,11 @@
 const description = '<ENTER YOUR DESCRIPTION>';
 
 const command = (argument1, argumentN, options) => {
-    console.log('ENTER YOUR INSTALLATION');
+    console.green('ENTER YOUR COMMAND');
 };
 
 const documentation = () => {
-    console.info(`ENTER YOUR DOCUMENTATION`);
+    console.yellow(`ENTER YOUR DOCUMENTATION`);
 };
 
 module.exports = {
