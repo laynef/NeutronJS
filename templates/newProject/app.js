@@ -11,7 +11,7 @@ const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const redis = require('redis');
 const client = redis.createClient('redis://localhost:6379');
-const { globalRenders } = require('./utils');
+const { globalRenders, makeHash } = require('./utils');
 const { docs } = require('./controllers');
 const routeVersions = require('./routes');
 const { each } = require('lodash');
@@ -47,16 +47,42 @@ app.use((req, res, next) => {
 });
 
 each(routeVersions, (versionDetails, apiVersion) => {
-    if (process.env.NODE_ENV && process.env.NODE_ENV !== 'production') app.get(`/docs/${apiVersion}`, docs({ apiVersion, allRoutes: versionDetails[apiVersion] }));
+    app.get(`/docs/${apiVersion}`, docs({ apiVersion, allRoutes: versionDetails[apiVersion] }));
     app.use(`/api/${apiVersion}`, versionDetails[`${apiVersion}Router`]);
 });
 
 // Static Pages
 const render = (pageName, customObject={}) => (req, res) => {
-    res.status(200).render(pageName, globalRenders(req, customObject));
+    res.status(200).render(pageName, globalRenders(pageName, req, res, customObject));
 };
 
-app.get('/', render('index'));
+
+if (process.env.NODE_ENV !== 'production') {
+    const webpackConfig = require('./webpack/client.config');
+    const compiler = require('webpack')(webpackConfig);
+    app.use(require('webpack-dev-middleware')(compiler, {
+        noInfo: true,
+        publicPath: webpackConfig.output.publicPath,
+        serverSideRender: true,
+        quiet: true,
+        lazy: false,
+        contentBase: path.join(__dirname, '..', 'assets', 'dist'),
+        stats: {
+            context: path.join(__dirname, '..', 'assets', 'dist'),
+            assets: true,
+            cachedAssets: true,
+        },
+    }));
+    app.use(require('webpack-hot-middleware')(compiler, {
+        path: '/__webpack_hmr',
+        dynamicPublicPath: webpackConfig.output.publicPath,
+        heartbeat: 10 * 1000,
+        timeout: 20 * 1000,
+        reload: true,
+    }));
+}
+
+app.get('/', render('pages/homepage', { hashId: makeHash(40) }));
 // Leave Here For Static Routes
 
 const server = http.createServer(app);

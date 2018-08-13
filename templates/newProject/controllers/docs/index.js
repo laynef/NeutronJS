@@ -9,10 +9,10 @@ module.exports = ({ apiVersion, allRoutes }) => (req, res) => {
                 return acc;
             }, allRoutes);
 
-            res.status(200).render('docs', {
+            res.status(200).render('utils/docs', {
                 routes: fullData,
                 apiVersion: apiVersion,
             });
-        }).catch(() => res.status(400).render('docs', { routes: { data: [] } }));
-    }).catch(() => res.status(400).render('docs', { routes: { data: [] } }));
+        }).catch(() => res.status(400).render('utils/docs', { routes: { data: [] } }));
+    }).catch(() => res.status(400).render('utils/docs', { routes: { data: [] } }));
 };
