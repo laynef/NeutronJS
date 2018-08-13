@@ -84,10 +84,26 @@ let withJavascripts = setByRoute({}, jsPaths, 'javascript');
 let withStylesheets = setByRoute(withJavascripts, cssPaths, 'stylesheet');
 
 const entry = bundleJavaScriptLast(withStylesheets);
+let plugins = [
+	new webpack.LoaderOptionsPlugin({
+		options: {
+			devtools: 'eval-source-map',
+		},
+	}),
+	new MiniCssExtractPlugin({
+		filename: '[name].css',
+		chunkFilename: '[name]-[id].css',
+	}),
+	new webpack.optimize.OccurrenceOrderPlugin(),
+	new webpack.HotModuleReplacementPlugin(),
+	new webpack.NoEmitOnErrorsPlugin(),
+];
+
+if (!noProduction) plugins.splice(3, 1);
 
 module.exports = {
 	name: 'client',
-	mode: 'development',
+	mode: noProduction ? 'development' : 'production',
 	context: context,
 	entry: entry,
 	output: {
@@ -129,18 +145,5 @@ module.exports = {
 		extensions: ['*', '.js', '.jsx', '.json', '.scss', '.sass', '.css', '.less'],
 		moduleExtensions: ['-loader'],
 	},
-	plugins: [
-		new webpack.LoaderOptionsPlugin({
-			options: {
-				devtools: 'eval-source-map',
-			},
-		}),
-		new MiniCssExtractPlugin({
-			filename: '[name].css',
-			chunkFilename: '[name]-[id].css',
-		}),
-		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoEmitOnErrorsPlugin(),
-	],
+	plugins: plugins,
 };

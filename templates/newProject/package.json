@@ -8,7 +8,7 @@
     "start": "NODE_ENV='production' node server.js",
     "dev": "nodemon app.js",
     "build:dev": "webpack --config ./webpack/client.config.js",
-    "build:prod": "webpack --config ./webpack/client.config.js -p"
+    "build:prod": "NODE_ENV='production' webpack --config ./webpack/client.config.js -p"
   },
   "keywords": [],
   "author": "",
