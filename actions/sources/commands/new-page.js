@@ -17,11 +17,13 @@ const command = (pageName, routePath, options) => {
     const newTemplateAssets = templates.replace(/CLIPAGE/g, pageName);
     const newTemplate = newTemplateAssets.replace(/CLITITLE/g, startCase(pageName));
     const root = process.cwd();
-    const settings = path.join(root, 'webpack', 'settings.json');
+    const settings = require(path.join(root, 'webpack', 'settings.json'));
     const application = fs.readFileSync(path.join(root, 'app.js'), { encoding: 'utf8' });
-    fs.writeFileSync(path.join(root, 'views', `${pageName}.pug`), newTemplate);
-    shell.cp(path.join(templatePath, 'assets', 'page.css'), path.join(root, 'assets', settings.styleType, `${pageName}.${settings.styleType}`));
-    shell.cp(path.join(templatePath, 'assets', 'page.js'), path.join(root, 'assets', settings.jsType, `${pageName}.${settings.jsType}`));
+    shell.exec(`mkdir -p ${path.resolve(root, 'views','pages', routePath)}`);
+    fs.writeFileSync(path.join(root, 'views', 'pages', routePath, `${pageName}.pug`), newTemplate);
+    shell.exec(`mkdir -p ${path.resolve(root, 'assets', settings.styleType, 'pages', routePath)}`);
+    shell.cp(path.join(templatePath, 'assets', `page.${settings.styleType}`), path.resolve(root, 'assets', settings.styleType, 'pages', routePath, `${pageName}.${settings.styleType}`));
+    shell.cp(path.join(templatePath, 'assets', `page.${settings.jsType}`), path.resolve(root, 'assets', settings.jsType, 'pages', routePath, `${pageName}.${settings.jsType}`));
     if (routePath) fs.writeFileSync(path.join(root, 'app.js'), application.replace(/\/\/ Leave Here For Static Routes/g, `// Leave Here For Static Routes\napp.get('${routePath}', render('${pageName}'));`));
     console.green('Your new page assets have be created.')
 };
