@@ -65,9 +65,10 @@ const setByRoute = (data, object, assetType) => {
 };
 
 const updateArray = (array) => {
-	const firstItem = array.shift();
+	let firstItem = array.shift();
 	const jsFiles = array.filter(e => e.endsWith('.js'));
 	const cssFiles = array.filter(e => e.endsWith('.css') || e.endsWith('.scss') || e.endsWith('.sass') || e.endsWith('.less'));
+	firstItem = noProduction ? [firstItem] : [];
 	return [].concat(firstItem).concat(cssFiles).concat(jsFiles);
 };
 

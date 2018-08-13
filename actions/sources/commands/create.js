@@ -6,7 +6,7 @@ const description = 'Create a new project';
 
 const command = (directoryName, options) => {
     if (!directoryName || !options) {
-        console.error('Must give your project a name');
+        console.red('Must give your project a name');
         return;
     }
 
@@ -16,7 +16,7 @@ const command = (directoryName, options) => {
     shell.cd(path.join(root, directoryName, 'openssl'));
     shell.exec('bash generateSecretKeys.sh web-secret');
     shell.cd(path.join(root));
-    console.log('Your project is ready.');
+    console.green('Your project is ready.');
 };
 
 const documentation = () => {

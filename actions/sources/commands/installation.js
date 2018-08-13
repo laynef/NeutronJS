@@ -3,7 +3,7 @@ const packager = require('../../../package.json');
 const description = 'Check to see if your installation is running';
 
 const command = () => {
-    console.log('Your installation is running.');
+    console.red('Your installation is running.');
 };
 
 const documentation = () => {

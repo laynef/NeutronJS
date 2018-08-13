@@ -1,7 +1,7 @@
 const description = '<ENTER YOUR DESCRIPTION>';
 
 const command = (argument1, argumentN, options) => {
-    console.log('ENTER YOUR INSTALLATION');
+    console.green('ENTER YOUR INSTALLATION');
 };
 
 const documentation = () => {

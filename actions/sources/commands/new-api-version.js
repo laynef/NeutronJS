@@ -6,10 +6,10 @@ const description = 'Create a new api version';
 
 const command = (versionNumber, options) => {
     if (!versionNumber || !options) {
-        console.log('Must enter a version number for your api');
+        console.red('Must enter a version number for your api');
         return;
     } else if (versionNumber != Number(versionNumber)) {
-        console.log('API Version number must be a number');
+        console.red('API Version number must be a number');
         return;
     }
 
@@ -19,7 +19,7 @@ const command = (versionNumber, options) => {
     const root = process.cwd();
     shell.cp('-R', controllerPath, path.join(root, 'controllers', `v${versionNumber}`));
     shell.cp('-R', routePath, path.join(root, 'routes', `v${versionNumber}`));
-    console.log('Your new api version has been created.');
+    console.green('Your new api version has been created.');
 };
 
 const documentation = () => {

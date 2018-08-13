@@ -8,7 +8,7 @@ const description = 'Generate a new page with it\'s assets';
 const command = (pageName, routePath, options) => {
 
     if (!pageName || !routePath || !options) {
-        console.error('Must enter a page name and it\'s route path');
+        console.red('Must enter a page name and it\'s route path');
         return;
     }
 

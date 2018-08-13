@@ -10,12 +10,12 @@ const command = (databaseType, options) => {
     };
 
     if (!databaseType || !options) {
-        console.error('You must enter a database type');
+        console.red('You must enter a database type');
         return;
     } else if (!database[databaseType]) {
-        console.error('Database options are:')
+        console.yellow('Database options are:')
         for (let i in database) {
-            console.error(`=> ${i}`);
+            console.yellow(`=> ${i}`);
         }
         return;
     }
@@ -26,7 +26,7 @@ const command = (databaseType, options) => {
     shell.mv(`${path.join(root, 'temp')}/*`, '.');
     shell.rm('-rf', path.join(root, 'temp'));
 
-    console.log('Your database has been setup');
+    console.green('Your database has been setup');
 };
 
 const documentation = () => {
