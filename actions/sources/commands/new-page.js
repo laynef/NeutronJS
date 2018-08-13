@@ -5,9 +5,9 @@ const { startCase } = require('lodash');
 
 const description = 'Generate a new page with it\'s assets';
 
-const command = (pageName, options) => {
+const command = (pageName, routePath, options) => {
 
-    if (!pageName || !options) {
+    if (!pageName || !routePath || !options) {
         console.error('Must enter a page name');
         return;
     }
@@ -17,23 +17,22 @@ const command = (pageName, options) => {
     const newTemplateAssets = templates.replace(/CLIPAGE/g, pageName);
     const newTemplate = newTemplateAssets.replace(/CLITITLE/g, startCase(pageName));
     const root = process.cwd();
+    const settings = path.join(root, 'webpack', 'settings.json');
     const application = fs.readFileSync(path.join(root, 'app.js'), { encoding: 'utf8' });
     fs.writeFileSync(path.join(root, 'views', `${pageName}.pug`), newTemplate);
-    shell.cp(path.join(templatePath, 'assets', 'page.css'), path.join(root, 'assets', 'css', `${pageName}.css`));
-    shell.cp(path.join(templatePath, 'assets', 'page.js'), path.join(root, 'assets', 'js', `${pageName}.js`));
-    if (options.routePath) fs.writeFileSync(path.join(root, 'app.js'), application.replace(/\/\/ Leave Here For Static Routes/g, `// Leave Here For Static Routes\napp.get('${options.routePath}', render('${pageName}'));`));
-    console.log('Your new page assets have be created.')
+    shell.cp(path.join(templatePath, 'assets', 'page.css'), path.join(root, 'assets', settings.styleType, `${pageName}.${settings.styleType}`));
+    shell.cp(path.join(templatePath, 'assets', 'page.js'), path.join(root, 'assets', settings.jsType, `${pageName}.${settings.jsType}`));
+    if (routePath) fs.writeFileSync(path.join(root, 'app.js'), application.replace(/\/\/ Leave Here For Static Routes/g, `// Leave Here For Static Routes\napp.get('${routePath}', render('${pageName}'));`));
+    console.green('Your new page assets have be created.')
 };
 
 const documentation = () => {
     console.yellow(`
-Options:
---routePath='/route-path'
+Command:
+Route Path: '/route-path'
 => Adding a route path will autogenerate a route with all it's assets
 
-Command:
-
-neutron new-page <page-name> [Options]
+neutron new-page <page-name> <route-path>
     `);
 };
 
