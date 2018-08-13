@@ -22,6 +22,7 @@ const command = (pageName, routePath, options) => {
     shell.mkdir('-p', `${path.resolve(root, 'views','pages', routePath)}`);
     fs.writeFileSync(path.join(root, 'views', 'pages', routePath, `${pageName}.pug`), newTemplate);
     shell.mkdir('-p',`${path.resolve(root, 'assets', settings.styleType, 'pages', routePath)}`);
+    shell.mkdir('-p',`${path.resolve(root, 'assets', settings.jsType, 'pages', routePath)}`);
     shell.cp(path.join(templatePath, 'assets', `page.${settings.styleType}`), path.resolve(root, 'assets', settings.styleType, 'pages', routePath, `${pageName}.${settings.styleType}`));
     shell.cp(path.join(templatePath, 'assets', `page.${settings.jsType}`), path.resolve(root, 'assets', settings.jsType, 'pages', routePath, `${pageName}.${settings.jsType}`));
     if (routePath) fs.writeFileSync(path.join(root, 'app.js'), application.replace(/\/\/ Leave Here For Static Routes/g, `// Leave Here For Static Routes\napp.get('${routePath}', render('${pageName}'));`));
