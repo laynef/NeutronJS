@@ -12,14 +12,16 @@ const command = (pageName, routePath, options) => {
         return;
     }
 
+    const root = process.cwd();
+    const settings = require(path.join(root, 'webpack', 'settings.json'));
+
     const templatePath = path.join(__dirname, '..', '..', '..', 'templates');
     const templates = fs.readFileSync(path.join(templatePath, 'assets', 'page.pug'), { encoding: 'utf8' });
-    const newTemplateAssets = templates.replace(/CLIPAGE/g, pageName);
+    const newTemplateAssets = templates.replace(/CLIPAGE/g, `${routePath}/${pageName}`);
     const newTemplateTitle = newTemplateAssets.replace(/CLITITLE/g, startCase(pageName));
     const routePathDepth = routePath.split('/').map(e => '../').join('');
     const newTemplate = newTemplateTitle.replace(/include \.\/utils\/meta\.pug/g, `include ${routePathDepth}utils/meta.pug`);
-    const root = process.cwd();
-    const settings = require(path.join(root, 'webpack', 'settings.json'));
+
     const application = fs.readFileSync(path.join(root, 'app.js'), { encoding: 'utf8' });
     shell.exec(`mkdir -p ${path.join(root, 'views','pages', routePath)} ${path.join(root, 'assets', settings.styleType, 'pages', routePath)} ${path.join(root, 'assets', settings.jsType, 'pages', routePath)}`);
     fs.writeFileSync(path.join(root, 'views', 'pages', routePath, `${pageName}.pug`), newTemplate);
