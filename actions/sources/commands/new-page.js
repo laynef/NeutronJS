@@ -17,7 +17,7 @@ const command = (pageName, routePath, options) => {
 
     const templatePath = path.join(__dirname, '..', '..', '..', 'templates');
     const templates = fs.readFileSync(path.join(templatePath, 'assets', 'page.pug'), { encoding: 'utf8' });
-    const newTemplateAssets = templates.replace(/CLIPAGE/g, `${routePath}/${pageName}`);
+    const newTemplateAssets = templates.replace(/\/CLIPAGE/g, `${routePath}/${pageName}`);
     const newTemplateTitle = newTemplateAssets.replace(/CLITITLE/g, startCase(pageName));
     const routePathDepth = routePath.split('/').map(e => '../').join('');
     const newTemplate = newTemplateTitle.replace(/include \.\/utils\/meta\.pug/g, `include ${routePathDepth}utils/meta.pug`);
