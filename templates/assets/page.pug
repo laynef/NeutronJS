@@ -4,14 +4,14 @@ html(lang="en")
         include ./utils/meta.pug
         title NeutronJS
         if process.env.NODE_ENV === 'production'
-            link(rel='stylesheet', type='text/css', href='/assets/dist/pages/CLIPAGE.css')
+            link(rel='stylesheet', type='text/css', href=`/assets/dist/pages/CLIPAGE.css?id=${hashId || 1}`)
         else 
             each file in cssFiles
                 link(src=`/assets/dist/pages${file}`, async)
     body
         h1(style='text-align: center;') CLITITLE
         if process.env.NODE_ENV === 'production'
-            script(src='/assets/dist/pages/CLIPAGE.js', async)
+            script(src=`/assets/dist/pages/CLIPAGE.js?id=${hashId || 1}`, async)
         else
             each file in jsFiles
                 script(src=`/assets/dist/pages${file}`, async)
