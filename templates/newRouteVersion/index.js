@@ -11,7 +11,7 @@ const apiVersion = versionArray[versionArray.length - 1];
 
 const setRoutes = (array, method) => {
     array.forEach(e => {
-        let middleware = e.middleware ? Object.values(e.middleware) : [(req, res, next) => { next(); }];
+        let middleware = Array.isArray(e.middleware) && e.middleware.length > 0 ? e.middleware.map(e => Object.values(e.middleware)[0]) : [(req, res, next) => { next(); }];
         Promise.all([e.controller])
             .then((controller) => {
                 router[method](e.route, ...middleware, (req, res) => controller[0](req, res));
@@ -33,7 +33,7 @@ let docs = []
     .concat(allPuts.map(e => ({...e, method: 'PUT'})))
     .concat(allDeletes.map(e => ({...e, method: 'DELETE'})))
     .filter(e => !e.ignore)
-    .map(e => ({ ...e, route: `/api/${apiVersion}${e.route}`, middleware: e.middleware ? Object.keys(e.middleware) : ['No Extra Middleware'] }));
+    .map(e => ({ ...e, route: `/api/${apiVersion}${e.route}`, middleware: e.middleware ? e.middleware.map(e => Object.keys(e)[0]) : ['No Extra Middleware'] }));
 
 const apiObject = {};
 apiObject[`${apiVersion}Router`] = router;
