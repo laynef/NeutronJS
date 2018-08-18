@@ -18,6 +18,13 @@ const command = (type, options) => {
         'js': 'js',
     };
 
+    const jsWebpack = {
+        'react': {},
+        'angular': {},
+        'vue': {},
+        'js': {},
+    };
+
     const styleTypes = {
         'sass': 'scss',
         'less': 'less',
@@ -75,8 +82,13 @@ const command = (type, options) => {
     });
 
     // Handle webpack here
+    const root = process.cwd();
+    const pathn = path.join(root, 'webpack', 'settings.json');
+    const javascriptSettings = require(pathn);
+    javascriptSettings.javascriptSettings = jsWebpack[before];
+    fs.writeFileSync(pathn, JSON.stringify(javascriptSettings));
 
-    console.green('');
+    console.green(`Your settings have been changed from ${before} to ${after}`);
 };
 
 const documentation = () => {

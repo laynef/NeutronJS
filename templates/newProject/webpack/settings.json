@@ -16,5 +16,10 @@
             "tooltip": true,
             "util": true
         }
-    }
+    },
+    "javascriptSettings": {			{
+        "test": ".js$",
+        "exclude": "node_modules",
+        "use": ["babel-loader"],
+    },
 }
