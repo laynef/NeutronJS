@@ -7,7 +7,7 @@ const description = 'Change javascript frameworks or style types';
 const command = (type, options) => {
 
     if (!type || !options) {
-        console.red(``);
+        console.red(`Please select a type of asset to change`);
         return;
     }
 
@@ -19,10 +19,26 @@ const command = (type, options) => {
     };
 
     const jsWebpack = {
-        'react': {},
-        'angular': {},
-        'vue': {},
-        'js': {},
+        'react': {
+            "test": ".jsx$",
+            "exclude": "node_modules",
+            "use": ["babel-loader"]
+        },
+        'angular': {
+            "test": ".ts$",
+            "exclude": "node_modules",
+            "use": ["babel-loader"]
+        },
+        'vue': {
+            "test": ".vue$",
+            "exclude": "node_modules",
+            "use": ["babel-loader"]
+        },
+        'js': {
+            "test": ".js$",
+            "exclude": "node_modules",
+            "use": ["babel-loader"]
+        },
     };
 
     const styleTypes = {
@@ -92,7 +108,22 @@ const command = (type, options) => {
 };
 
 const documentation = () => {
-    console.yellow(``);
+    console.yellow(`
+Options:
+    stylesheets
+    -> css
+    -> less
+    -> sass
+
+    javascripts
+    -> js
+    -> react
+    -> angular
+    -> vue
+
+Command:
+neutron settings <command-name> [Options]
+    `);
 };
 
 module.exports = {
