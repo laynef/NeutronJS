@@ -16,6 +16,7 @@ const command = (directoryName, options) => {
     shell.cd(path.join(root, directoryName, 'openssl'));
     shell.exec('bash generateSecretKeys.sh web-secret');
     shell.cd(path.join(root));
+    
     console.green('Your project is ready.');
 };
 
