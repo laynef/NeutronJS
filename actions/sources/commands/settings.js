@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const shell = require('shelljs');
 
 const description = 'Change javascript frameworks or style types';
 
@@ -23,12 +24,12 @@ const command = (type, options) => {
         'css': 'css',
     };
 
-    const styles = Object.keys(styleTypes).reduce((acc, item) => {
+    const styles = Object.values(styleTypes).reduce((acc, item) => {
         acc[item] = item;
         return acc;
     }, {});
 
-    const javascripts = Object.keys(jsTypes).reduce((acc, item) => {
+    const javascripts = Object.values(jsTypes).reduce((acc, item) => {
         acc[item] = item;
         return acc;
     }, {});
@@ -44,8 +45,36 @@ const command = (type, options) => {
 
     // styles change file path types
     // javascript change full root files
-    fs.readdirSync(path.join(__dirname, 'assets', before, 'pages'));
-    fs.readdirSync(path.join(__dirname, 'assets', after, 'pages'));
+    const arrayOfPaths = (data, pathn) => {
+        fs.readdirSync(pathn).forEach(dir => {
+            if (fs.lstatSync(path.join(pathn, dir)).isDirectory()) {
+                const temp = data;
+                temp.push(path.join(pathn, dir));
+                arrayOfPaths(temp, path.join(pathn, dir));
+            } else {
+                data.push(pathn);
+            }
+        });
+
+        return data;
+    };
+
+    const beforeTypes = arrayOfPaths([], path.join(__dirname, 'assets', before, 'pages'));
+    shell.mv(path.join(__dirname, 'assets', before), path.join(__dirname, 'assets', after));
+    beforeTypes.forEach(e => {
+        const fileArray = e.split('/');
+        const filename = fileArray[fileArray.length - 1].split('.')[0] + '.' + after;
+        const newFile = fileArray.slice(0, fileArray.length - 2).join('/') + filename;
+        
+        if (jsTypes[before]) {
+            shell.mv(e);
+            shell.cp(path.join(__dirname, '..', '..', '..', 'templates', 'assets', `page.${after}`), newFile);
+        } else {
+            shell.mv(e, newFile);
+        }
+    });
+
+    // Handle webpack here
 
     console.green('');
 };
