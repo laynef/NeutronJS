@@ -2,10 +2,12 @@ const sources = require('../sources');
 
 const Commander = function (commandName, args, flags) {
     var execute = function () {
+
         const options = flags.reduce((acculum, item) => {
             acculum = { ...acculum, ...item };
             return acculum;
         }, {});
+
         if (sources[commandName] && options.help) {
             return sources[commandName].documentation();
         } else if (sources[commandName]) {
@@ -13,9 +15,10 @@ const Commander = function (commandName, args, flags) {
         } else {
             return sources.documentation.command();
         }
+
     };
 
-    return { execute };
+    return { execute: execute };
 };
 
 module.exports = Commander;
