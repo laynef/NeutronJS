@@ -12,8 +12,7 @@ import { Component } from '@angular/core';
 
 class AppComponent {
     title = 'angular';
-}
-  
+} 
 
 @NgModule({
   declarations: [
@@ -22,7 +21,9 @@ class AppComponent {
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    // recreate class with redux provided
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
