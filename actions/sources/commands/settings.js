@@ -47,7 +47,7 @@ const command = (type, options) => {
         'css': 'css',
     };
 
-    const styles = Object.values(styleTypes).reduce((acc, item) => {
+    const stylesheets = Object.values(styleTypes).reduce((acc, item) => {
         acc[item] = item;
         return acc;
     }, {});
@@ -58,7 +58,7 @@ const command = (type, options) => {
     }, {});
 
     const trail = fs.readdirSync(path.join(__dirname, 'assets')).reduce((acc, item) => {
-        if (styles[item]) acc[item] = styles[item];
+        if (stylesheets[item]) acc[item] = stylesheets[item];
         if (javascripts[item]) acc[item] = javascripts[item];
         return acc;
     }, {});

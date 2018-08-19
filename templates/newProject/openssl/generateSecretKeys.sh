@@ -1,2 +1,3 @@
 NAME=$1
-openssl genrsa -out $NAME.pem 1024
+SECURITY=($2 | 1024)
+openssl genrsa -out $NAME.pem $SECURITY
