@@ -4,6 +4,8 @@ export default class Application {
     el: '#app',
     render: h => h(this),
     template: ``,
-    state: {}
+    state: {},
+    // needs hot reloading
 }
 </script>
+

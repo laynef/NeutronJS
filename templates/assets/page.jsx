@@ -5,18 +5,17 @@ import createStore from '../redux/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import { declarePublicRoutes } from './routes';
 
 import './real-path';
-import 'velocity-animate';
-import 'velocity-animate/velocity.ui';
 
 const dest = document.getElementById('public-app');
 const store = createStore(window.STORE);
 
 const component = (
 	<BrowserRouter>
-		{renderRoutes(declarePublicRoutes(true))}
+		{renderRoutes([
+			// route here
+		])}
 	</BrowserRouter>
 );
 

@@ -26,4 +26,5 @@ class AppComponent {
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
