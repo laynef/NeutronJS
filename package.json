@@ -1,6 +1,6 @@
 {
-    "name": "@lfaler/neutronjs",
-    "title": "NeutronJS",
+    "name": "rails-on-node",
+    "title": "Rails On Node",
     "version": "0.0.0",
     "description": "",
     "scripts": {
